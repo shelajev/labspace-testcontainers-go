@@ -3,23 +3,18 @@ metadata:
   sourceRepo: github.com/shelajev/labspace-testcontainers-go
   contentVersion: abcd123 # Will be filled in during CI
 
-title: Labspace starter
+title: Getting Started with Testcontainers for Go
 description: |
-  A basic template for creating a Labspace, including all of the boilerplate needed to write and publish a Labspace.
+  Learn how to test Go applications against real services using Testcontainers for Go.
+  You'll write integration tests for a PostgreSQL-backed customer repository — no mocks,
+  no in-memory substitutes, just real containers started on demand.
 
 sections:
   - title: Introduction
     contentPath: 01-introduction.md
-  - title: Main Content 1
-    contentPath: 02-main-content.md
-  - title: Conclusion
-    contentPath: 03-conclusion.md
-
-# Services are used to add default tabs in the Labspace interface.
-# The IDE will always be present as a service, but you can add additional services as needed.
-# Icon values come from https://fonts.google.com/icons/
-services:
-  - id: app
-    url: http://localhost:3000
-    title: App
-    icon: anchor
+  - title: Write Your First Test
+    contentPath: 02-write-first-test.md
+  - title: Reuse Containers with Test Suites
+    contentPath: 03-test-suites.md
+  - title: Run All Tests & Next Steps
+    contentPath: 04-run-and-explore.md
