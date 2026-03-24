@@ -115,7 +115,7 @@ t.Cleanup(func() {
 ## Run This Test
 
 ```bash
-cd ~/project && go test -v -run TestCustomerRepository ./customer/
+go test -v -run TestCustomerRepository ./customer/
 ```
 
 You'll see Testcontainers pull (or reuse) the image, start the container, run your test, and terminate the container. The output looks something like:
@@ -140,7 +140,7 @@ ok  	github.com/testcontainers/testcontainers-go-demo/customer	3.221s
 Try changing the PostgreSQL version from `postgres:16-alpine` to `postgres:17-alpine` in the editor and re-run the test. Testcontainers handles the rest — no configuration changes needed.
 
 ```bash
-cd ~/project && go test -v -run TestCustomerRepository ./customer/
+go test -v -run TestCustomerRepository ./customer/
 ```
 
 Move on to learn how to share a single container across multiple tests.

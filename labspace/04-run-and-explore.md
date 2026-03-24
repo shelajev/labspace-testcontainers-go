@@ -5,14 +5,14 @@ You've written both a standalone integration test and a reusable suite. Let's ru
 ## Run All Tests
 
 ```bash
-cd ~/project && go test -v ./...
+go test -v ./...
 ```
 
 You'll see output like this:
 
 ```text no-run-button no-copy-button
 === RUN   TestCustomerRepository
-2024/01/01 12:00:00 Starting container for image: postgres:15.3-alpine
+2024/01/01 12:00:00 Starting container for image: postgres:16-alpine
 2024/01/01 12:00:02 Container started
 --- PASS: TestCustomerRepository (3.21s)
 === RUN   TestCustomerRepoTestSuite
@@ -30,7 +30,7 @@ Two containers started in total — one for `TestCustomerRepository` and one for
 > [!TIP]
 > You can run tests with `-count=1` to bypass Go's test result cache and force containers to start fresh every time:
 > ```bash
-> cd ~/project && go test -v -count=1 ./...
+> go test -v -count=1 ./...
 > ```
 
 ## What You Built
@@ -67,7 +67,7 @@ find ~/project -name "*.go" | sort
 
 ### Try different PostgreSQL versions
 
-Change `postgres:15.3-alpine` to `postgres:16-alpine` or `postgres:17-alpine` in your test and rerun. Testcontainers handles the rest — no configuration changes needed.
+Change `postgres:16-alpine` to `postgres:16-alpine` or `postgres:17-alpine` in your test and rerun. Testcontainers handles the rest — no configuration changes needed.
 
 ### Explore other Testcontainers modules
 

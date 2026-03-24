@@ -137,7 +137,7 @@ func TestCustomerRepoTestSuite(t *testing.T) {
 ## Run the Suite
 
 ```bash
-cd ~/project && go test -v -run TestCustomerRepoTestSuite ./customer/
+go test -v -run TestCustomerRepoTestSuite ./customer/
 ```
 
 You should see both suite tests pass with only one container start:
