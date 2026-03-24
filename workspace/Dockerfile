@@ -1,14 +1,15 @@
 FROM dockersamples/labspace-workspace-base
 
 ARG GO_VERSION=1.23.5
+ARG TARGETARCH
 
 USER root
 
-# Install Go
+# Install Go for the target architecture
 RUN apt-get update -qq && apt-get install -y --no-install-recommends wget ca-certificates && \
-    wget -q "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz" && \
-    tar -C /usr/local -xzf "go${GO_VERSION}.linux-amd64.tar.gz" && \
-    rm "go${GO_VERSION}.linux-amd64.tar.gz" && \
+    wget -q "https://go.dev/dl/go${GO_VERSION}.linux-${TARGETARCH}.tar.gz" && \
+    tar -C /usr/local -xzf "go${GO_VERSION}.linux-${TARGETARCH}.tar.gz" && \
+    rm "go${GO_VERSION}.linux-${TARGETARCH}.tar.gz" && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV PATH=/usr/local/go/bin:$PATH
