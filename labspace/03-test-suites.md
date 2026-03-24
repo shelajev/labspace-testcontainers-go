@@ -4,13 +4,11 @@ In the previous section, `TestCustomerRepository` starts a container and tears i
 
 The solution: start one container, run all tests against it, tear it down at the end. Testify's **test suites** make this clean and structured.
 
-## Extract Container Setup to a Helper
+## The Container Helper
 
-First, create a shared helper that other test files can use to start a PostgreSQL container.
+Open `testhelpers/containers.go` in the editor. This is a shared helper that any test file can use:
 
-Create the file `testhelpers/containers.go`:
-
-```go save-as=testhelpers/containers.go
+```go no-run-button
 package testhelpers
 
 import (
@@ -53,11 +51,11 @@ func CreatePostgresContainer(ctx context.Context) (*PostgresContainer, error) {
 
 `PostgresContainer` wraps the postgres module's container and eagerly resolves the connection string, so callers don't need to call `ConnectionString` themselves.
 
-## Write the Test Suite
+## The Test Suite
 
-Now create `customer/repo_suite_test.go`, which uses testify's `Suite` to start the container once for all tests in the suite:
+Now open `customer/repo_suite_test.go`. This uses testify's `Suite` to start the container once for all tests:
 
-```go save-as=customer/repo_suite_test.go
+```go no-run-button
 package customer
 
 import (

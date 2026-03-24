@@ -1,6 +1,6 @@
 # Write Your First Test
 
-Time to write an integration test that starts a real PostgreSQL container.
+Time to look at the integration test that starts a real PostgreSQL container.
 
 ## How It Works
 
@@ -12,13 +12,13 @@ Testcontainers for Go provides a `postgres` module that handles:
 4. Waiting until PostgreSQL is ready to accept connections
 5. Returning a connection string you can pass to your application
 
-Your test starts the container, creates the repository with its connection string, exercises the code, and cleans up via `t.Cleanup`.
+The test starts the container, creates the repository with its connection string, exercises the code, and cleans up automatically.
 
-## Create the Test File
+## The Test File
 
-Create `customer/repo_test.go` with the following content:
+Open `customer/repo_test.go` in the editor. Here's what it contains:
 
-```go save-as=customer/repo_test.go
+```go no-run-button
 package customer
 
 import (
@@ -133,6 +133,14 @@ ok  	github.com/testcontainers/testcontainers-go-demo/customer	3.221s
 > The first run is slower because Docker needs to pull the image. Subsequent runs reuse the cached image and are much faster.
 
 > [!NOTE]
-> The `GetCustomerByEmail` assertion retrieves `henry@gmail.com`, which was inserted by `CreateCustomer` in the same test. Each test run gets a fresh database — the init script only seeds `john@gmail.com`. In the next section, you'll see how to handle this cleanly when multiple tests share the same container.
+> The `GetCustomerByEmail` assertion retrieves `henry@gmail.com`, which was inserted by `CreateCustomer` in the same test. Each test run gets a fresh database — the init script only seeds `john@gmail.com`. In the next section, you'll see how to share a container across multiple tests.
+
+## Try It Yourself
+
+Try changing the PostgreSQL version from `postgres:16-alpine` to `postgres:17-alpine` in the editor and re-run the test. Testcontainers handles the rest — no configuration changes needed.
+
+```bash
+cd ~/project && go test -v -run TestCustomerRepository ./customer/
+```
 
 Move on to learn how to share a single container across multiple tests.
