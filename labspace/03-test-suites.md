@@ -15,7 +15,6 @@ import (
 	"context"
 	"path/filepath"
 
-	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/modules/postgres"
 )
 
