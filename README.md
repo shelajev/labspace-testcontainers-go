@@ -1,48 +1,31 @@
-# Labspace starter
+# Labspace - Getting Started with Testcontainers for Go
 
-This repository is intended to server as a template to help bootstrap a new Labspace.
+Testcontainers lets you use real Docker containers in your tests instead of mocks.
+In this Labspace, you'll learn how to test a PostgreSQL-backed Go application using
+Testcontainers for Go.
 
-## Instructions
+## Learning objectives
 
-1. Create a new repository using this repo as the template ([docs here](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)).
+- Write integration tests against a real PostgreSQL container started on demand
+- Use the `postgres` module's built-in wait strategies for reliable startup
+- Reuse a single container across multiple tests with testify test suites
 
-    **NOTE:** After creating the repo, a GHA workflow will run to do some additional bootstrapping. The bootstrapping workflow file will be removed during bootstrapping.
+## Launch the Labspace
 
-2. Clone your newly created repo to your local machine
+```bash
+docker compose -f oci://olegselajev241/labspace-testcontainers-go up -d
+```
 
-3. Start the local development mode:
+Open your browser to http://localhost:3030.
 
-    ```bash
-    # On Mac/Linux
-    CONTENT_PATH=$PWD docker compose up --watch
+## Contributing
 
-    # On Windows with PowerShell
-    $Env:CONTENT_PATH = (Get-Location).Path; docker compose up --watch
-    ```
+```bash
+# On Mac/Linux
+CONTENT_PATH=$PWD docker compose up --watch
 
-4. Update the `labspace/labspace.yaml` with your Labspace's title and description
+# On Windows with PowerShell
+$Env:CONTENT_PATH = (Get-Location).Path; docker compose up --watch
+```
 
-5. Write your Labspace! Being in dev mode, your changes should be visible in the interface without a restart. Feel free to edit either on your host machine or in the Labspace itself!
-
-    Add any supporting application files or resources directly into the Labspace. This repo will be cloned into the Labspace at startup.
-
-    Be sure to check out the [docs](https://github.com/dockersamples/labspace-infra/tree/main/docs) for additional information and guidelines.
-
-
-
-### Setting up the deployment pipeline
-
-The template repo contains a workflow file to make it easy to publish your Labspace.
-
-1. Add GitHub Action Secrets in your new repo for the following:
-
-    - `DOCKERHUB_USERNAME` - the username to authenticate to Docker Hub with
-    - `DOCKERHUB_TOKEN` - a personal or organization access token to use for authentication
-
-2. In the `.github/workflows/publish-labspace.yaml.temp` file, update the `DOCKERHUB_REPO` with the name of the Docker Hub repo you want to publish to.
-
-3. Rename the workflow file to remove the `.temp` extension.
-
-    ```bash
-    mv .github/workflows/publish-labspace.yaml.temp .github/workflows/publish-labspace.yaml
-    ```
+Open the Labspace at http://localhost:3030.
