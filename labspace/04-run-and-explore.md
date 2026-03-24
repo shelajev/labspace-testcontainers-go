@@ -67,7 +67,7 @@ find ~/project -name "*.go" | sort
 
 ### Try different PostgreSQL versions
 
-Change `postgres:16-alpine` to `postgres:16-alpine` or `postgres:17-alpine` in your test and rerun. Testcontainers handles the rest — no configuration changes needed.
+Change `postgres:16-alpine` to `postgres:17-alpine` in your test and rerun. Testcontainers handles the rest — no configuration changes needed.
 
 ### Explore other Testcontainers modules
 
@@ -78,10 +78,6 @@ go get github.com/testcontainers/testcontainers-go/modules/redis
 go get github.com/testcontainers/testcontainers-go/modules/kafka
 go get github.com/testcontainers/testcontainers-go/modules/localstack
 ```
-
-### Use Testcontainers Cloud
-
-For CI environments or teams with limited local Docker resources, [Testcontainers Cloud](https://testcontainers.com/cloud/) runs your containers remotely. Set the `TC_CLOUD_TOKEN` environment variable and your tests work without any code changes.
 
 ### Read the docs
 
