@@ -16,11 +16,9 @@ package testhelpers
 import (
 	"context"
 	"path/filepath"
-	"time"
 
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/modules/postgres"
-	"github.com/testcontainers/testcontainers-go/wait"
 )
 
 type PostgresContainer struct {
@@ -29,16 +27,13 @@ type PostgresContainer struct {
 }
 
 func CreatePostgresContainer(ctx context.Context) (*PostgresContainer, error) {
-	pgContainer, err := postgres.RunContainer(ctx,
-		testcontainers.WithImage("postgres:15.3-alpine"),
+	pgContainer, err := postgres.Run(ctx,
+		"postgres:16-alpine",
 		postgres.WithInitScripts(filepath.Join("..", "testdata", "init-db.sql")),
 		postgres.WithDatabase("test-db"),
 		postgres.WithUsername("postgres"),
 		postgres.WithPassword("postgres"),
-		testcontainers.WithWaitStrategy(
-			wait.ForLog("database system is ready to accept connections").
-				WithOccurrence(2).
-				WithStartupTimeout(5*time.Second)),
+		postgres.BasicWaitStrategies(),
 	)
 	if err != nil {
 		return nil, err
@@ -72,6 +67,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
+	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go-demo/testhelpers"
 )
 
@@ -99,7 +95,7 @@ func (suite *CustomerRepoTestSuite) SetupSuite() {
 }
 
 func (suite *CustomerRepoTestSuite) TearDownSuite() {
-	if err := suite.pgContainer.Terminate(suite.ctx); err != nil {
+	if err := testcontainers.TerminateContainer(suite.pgContainer.PostgresContainer); err != nil {
 		log.Fatalf("error terminating postgres container: %s", err)
 	}
 }
@@ -134,7 +130,7 @@ func TestCustomerRepoTestSuite(t *testing.T) {
 
 **`SetupSuite`** runs once before all tests in the suite. It starts the container and creates a single `Repository` instance shared by all tests.
 
-**`TearDownSuite`** runs once after all tests complete (pass or fail). This is where the container is terminated.
+**`TearDownSuite`** runs once after all tests complete (pass or fail). `testcontainers.TerminateContainer` stops and removes the container.
 
 **Individual tests** (`TestCreateCustomer`, `TestGetCustomerByEmail`) run against the shared container. Notice that `TestGetCustomerByEmail` queries for `john@gmail.com` — the row seeded by `init-db.sql`. It doesn't depend on `TestCreateCustomer` having run first.
 

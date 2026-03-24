@@ -1,6 +1,6 @@
 FROM dockersamples/labspace-workspace-base
 
-ARG GO_VERSION=1.23.5
+ARG GO_VERSION=1.25.8
 ARG TARGETARCH
 
 USER root
